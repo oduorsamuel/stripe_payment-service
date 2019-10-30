@@ -1,21 +1,91 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 mr-auto ml-auto">
+      <div class="panel panel-default">
+        <form #customStripeForm="ngForm" (ngSubmit)="pay(customStripeForm)">
+          <div class="panel-body mt-5">
+            <h4>Stripe - Custom form demo</h4>
+            <p><b>{{ message }}</b></p>
+            <div class="row">
+              <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                  <label>CARD NUMBER</label>
+                  <div class="input-group">
+                    <input type="text"  #cardNumber="ngModel"
+                    [(ngModel)]="stripe.cardNumber" class="form-control" placeholder="Valid Card Number" name="cardNumber" maxlength="18" />
+                    <span class="input-group-addon">
+                      <span class="fa fa-credit-card"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-7 col-md-7">
+                <div class="form-group">
+                  <label><span class="hidden-xs">EXPIRATION</span> Date</label>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <select name="expMonth" #expMonth="ngModel"
+                         [(ngModel)]="stripe.expMonth"  class="form-control">
+                          <option value="">Select Month</option>
+                          <option value="1">01</option>
+                          <option value="2">02</option>
+                          <option value="3">03</option>
+                          <option value="4">04</option>
+                          <option value="5">05</option>
+                          <option value="6">06</option>
+                          <option value="7">07</option>
+                          <option value="8">08</option>
+                          <option value="9">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 pull-right">
+                    <div class="form-group">
+                      <select name="expYear" #expYear="ngModel"
+                      [(ngModel)]="stripe.expYear"  class="form-control">
+                        <option value="">Select Year</option>
+                        <option value="20">2020</option>
+                        <option value="21">2021</option>
+                        <option value="22">2022</option>
+                        <option value="23">2023</option>
+                        <option value="24">2024</option>
+                        <option value="25">2025</option>
+                        <option value="26">2026</option>
+                        <option value="27">2027</option>
+                        <option value="28">2028</option>
+                        <option value="29">2029</option>
+                        <option value="30">2030</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-5 col-md-5 pull-right">
+              <div class="form-group">
+                <label>CV CODE</label>
+                <input type="text" name="cvv" #cvv="ngModel"
+                [(ngModel)]="stripe.cvv"  class="form-control" placeholder="CVC" maxlength="4" />
+              </div>
+            </div>
 
-<router-outlet></router-outlet>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+              <button class="btn btn-warning btn-lg btn-block" *ngIf="!formProcess">Process payment</button>
+              <span class="btn btn-warning btn-lg btn-block" *ngIf="formProcess">Processing please wait...</span>
+          </div>
+        </div>
+      </form>
+      <p class="mt-2">Try it out using the test card number 4242 4242 4242 4242, a random three-digit CVC number and any expiration date in the future.</p>
+    </div>
+  </div>
+</div>
+</div>
